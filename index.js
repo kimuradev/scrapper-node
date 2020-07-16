@@ -29,6 +29,22 @@ var app = express();
 //   casper.done();
 // });
 
+app.get('/casper', function (req, res) {
+  var casper = require('casper').create();
+  casper.start('https://meu.inss.gov.br/central/#/aberto/autenticidade');
+
+  casper.then(function () {
+    var body = document.querySelector('#root');
+    //this.echo('First Page: ' + document.querySelectorAll('#root'));
+    console.log(body);
+    // for (let li of body) {
+    //   console.log(li);
+    // }
+  });
+
+  casper.run();
+});
+
 app.get('/scrape', function (req, res) {
   const url = 'https://meu.inss.gov.br/central/#/aberto/autenticidade';
 
